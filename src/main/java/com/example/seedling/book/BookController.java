@@ -1,5 +1,6 @@
-package com.example.seedling;
+package com.example.seedling.book;
 
+import com.example.seedling.common.SeedlingException;
 import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,6 @@ public class BookController {
 
   @PostMapping("/book")
   public Book registerBook(@RequestBody RegisterBookRequest request) {
-    return books.save(new Book(request.getTitle(), request.getAuthor(), request.getDescription()));
+    return books.save(new Book(request.title(), request.author(), request.description()));
   }
 }
