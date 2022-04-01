@@ -20,7 +20,7 @@ public class BookController {
     this.books = books;
   }
 
-  @PreAuthorize("hasRole('USER')")
+  @PreAuthorize("hasAuthority('getBook')")
   @Operation(summary = "获取书籍列表")
   @GetMapping("/book/{title}")
   public Book getBookByTitle(@Parameter(description = "书籍标题") @PathVariable("title") String title) {
@@ -32,7 +32,7 @@ public class BookController {
             });
   }
 
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('registerBook')")
   @Operation(summary = "登记书籍")
   @PostMapping("/book")
   public Book registerBook(@RequestBody RegisterBookRequest request) {

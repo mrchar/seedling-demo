@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -34,6 +35,8 @@ public class User implements UserDetails {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles;
+
+  @Transient private Set<GrantedAuthority> authorities;
 
   @PersistenceConstructor
   protected User() {}
@@ -77,7 +80,22 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return roles;
+    if (authorities == null) {
+      synchronized (this) {
+        if (authorities == null) {
+          authorities = new HashSet<>();
+          if (roles != null) {
+            roles.forEach(
+                role -> {
+                  this.authorities.add(role);
+                  this.authorities.addAll(role.getAuthorities());
+                });
+          }
+        }
+      }
+    }
+
+    return authorities;
   }
 
   @Override

@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Entity
@@ -22,12 +23,24 @@ public class Role implements GrantedAuthority {
   @Column(name = "summary")
   private String summary;
 
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "role_authority",
+      joinColumns = @JoinColumn(name = "role_id"),
+      inverseJoinColumns = @JoinColumn(name = "authority_id"))
+  Set<Authority> authorities;
+
   public Role() {}
 
   public Role(String name, String alias, String summary) {
     this.name = name;
     this.alias = alias;
     this.summary = summary;
+  }
+
+  public Role(String name, String alias, String summary, Set<Authority> authorities) {
+    this(name, alias, summary);
+    this.authorities = authorities;
   }
 
   @Override
