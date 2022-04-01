@@ -1,5 +1,6 @@
 package com.example.seedling.common;
 
+import com.example.seedling.system.model.Roles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,7 +19,8 @@ public class SecurityConfiguration {
               authorize.antMatchers("/swagger-ui/**").permitAll();
               authorize.antMatchers("/v3/api-docs").permitAll();
               authorize.antMatchers(HttpMethod.POST, "/login").permitAll();
-              authorize.antMatchers(HttpMethod.GET, "/book/*").permitAll();
+              authorize.antMatchers(HttpMethod.GET, "/book/*").hasRole(Roles.USER);
+              authorize.antMatchers(HttpMethod.POST, "/book").hasRole(Roles.ADMIN);
               authorize.anyRequest().authenticated();
             })
         // TODO: 启用防御跨站请求伪造策略

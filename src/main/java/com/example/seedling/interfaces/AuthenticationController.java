@@ -1,5 +1,6 @@
-package com.example.seedling.system;
+package com.example.seedling.interfaces;
 
+import com.example.seedling.interfaces.request.UsernamePasswordRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.example.seedling.system;
+package com.example.seedling.system.model;
 
 import lombok.Getter;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Getter
 @Entity
@@ -26,6 +27,13 @@ public class User implements UserDetails {
 
   @Column(name = "password")
   private String password;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "user_role",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private Set<Role> roles;
 
   @PersistenceConstructor
   protected User() {}
@@ -47,6 +55,11 @@ public class User implements UserDetails {
     this.password = passwordEncoder.encode(password);
   }
 
+  public User(String name, String password, Set<Role> roles) {
+    this(name, password);
+    this.roles = roles;
+  }
+
   public static User ofUsername(String username) {
     return new User(username);
   }
@@ -64,7 +77,7 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    return roles;
   }
 
   @Override

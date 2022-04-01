@@ -1,5 +1,7 @@
-package com.example.seedling.system;
+package com.example.seedling.system.service;
 
+import com.example.seedling.system.model.User;
+import com.example.seedling.system.repository.UserRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
