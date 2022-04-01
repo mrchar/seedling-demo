@@ -1,7 +1,7 @@
 package com.example.seedling;
 
-import com.example.seedling.book.Book;
-import com.example.seedling.book.BookRepository;
+import com.example.seedling.book.model.Book;
+import com.example.seedling.book.repository.BookRepository;
 import com.example.seedling.system.model.Role;
 import com.example.seedling.system.model.Roles;
 import com.example.seedling.system.model.User;

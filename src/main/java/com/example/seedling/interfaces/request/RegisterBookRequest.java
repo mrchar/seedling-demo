@@ -1,4 +1,4 @@
-package com.example.seedling.book;
+package com.example.seedling.interfaces.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

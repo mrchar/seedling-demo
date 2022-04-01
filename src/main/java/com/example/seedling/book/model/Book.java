@@ -1,4 +1,4 @@
-package com.example.seedling.book;
+package com.example.seedling.book.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

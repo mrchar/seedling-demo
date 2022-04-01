@@ -1,5 +1,6 @@
-package com.example.seedling.book;
+package com.example.seedling.book.repository;
 
+import com.example.seedling.book.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
