@@ -1,5 +1,6 @@
 package com.example.seedling.book;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "book")
+@Schema(description = "书籍信息")
 public class Book {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

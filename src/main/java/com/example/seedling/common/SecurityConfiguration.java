@@ -15,6 +15,8 @@ public class SecurityConfiguration {
     httpSecurity
         .authorizeHttpRequests(
             (authorize) -> {
+              authorize.antMatchers("/swagger-ui/**").permitAll();
+              authorize.antMatchers("/v3/api-docs").permitAll();
               authorize.antMatchers(HttpMethod.POST, "/login").permitAll();
               authorize.antMatchers(HttpMethod.GET, "/book/*").permitAll();
               authorize.anyRequest().authenticated();
